@@ -1,0 +1,9 @@
+<form action="/posts" method="post" />
+  <% if post.title.nil? %><input type="hidden" name="_method" value="put"/><% end %>
+
+    <input type="text" name="title" id="post_title" value="<%= post.title %>" />
+
+    <input type="checkbox" name="event" id="post_event" <%= 'checked' if post.event %> />
+
+    <textarea name="body" id="post_body"><%= post.body %> </textarea>
+</form>

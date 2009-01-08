@@ -7,88 +7,56 @@ root_dir = File.dirname(__FILE__)
 $:.unshift "#{root_dir}/lib"
 $:.unshift "#{root_dir}"
 
-
-
-class Post
-  include DataMapper::Resource
-  include Paperclip::Resource
-
-  property :id, Integer, :serial => true
-  property :slug, String, :size => 255, :nullable => false, :index => :unique
-  property :title, String, :size => 255, :nullable => false
-  property :summary, Text, :lazy => false
-  property :event, Boolean, :default => false
-  property :created_at, DateTime, :nullable => false, :index => true
-  property :updated_at, DateTime, :nullable => false
-  property :body, Text
-
-  property :flyer_file_name, String
-  property :flyer_content_type, String
-  property :flyer_file_size, Integer
-  property :flyer_updated_at, DateTime
-
-  has_attached_file :flyer
-
-  alias_method :event, :event?
-
-  before(:save) { self.updated_at = Time.now }
-
-  def initialize(attributes={})
-    self.created_at = Time.now
-    self.updated_at = self.created_at
-    super
-  end
-
-  def url
-    d = created_at
-    "post/#{d.year}/#{d.month}/#{d.day}/#{slug}"
-  end
-
-  def permalink
-  end
+configure :development do
+  DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/development.db")
+  DataMapper.auto_migrate!
+  
+  require 'ostruct'
+  Greek = OpenStruct.new(
+    :title => 'Nu Alpah Phi',
+    :author => 'admin',
+    :url_base => 'http://localhost:4567/'
+  )
 end
 
-class GreekClass
-  include DataMapper::Resource
-  include Paperclip::Resource
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
+require 'models'
 
-  property :name, String, :size => 255, :nullable => false
-  property :short, String, :size => 10, :nullable => false, :index => :unique
-
-  property :banner_file_name, String
-  property :banner_content_type, String
-  property :banner_file_size, Integer
-
-  has_attached_file :banner
+helpers do
 end
 
-class Brother
-  include DataMapper::Resource
-  include Paperclip::Resource
+layout 'layout'
 
-  property :id, Integer, :serial => true
-  property :pledge_class_id, Integer, :index => true, :nullable => false
-  property :name, String, :size => 255, :nullable => false
-  property :pledge_name, String, :size => 255, :nullable => false
-  property :hometown, String, :size => 255
-  property :major, String, :size => 255
-  property :interests, String, :size => 255
-  property :quote, String
-
-  property :mugshot_file_name, String
-  property :mugshot_content_type, String
-  property :mugshot_file_size, Integer
-
-  has_attached_file :mugshot
-
-  belongs_to :greek_class
-end
-
-if development?
-  Post.auto_migrate!
-  Event.auto_migrate!
-end
+### Public
 
 get '/' do
-  @posts = Post.all + Event.all
+  posts = Post.latest(:limit => 20)
+  erb :index, :locals => { :posts => posts }
+end
+
+get '/post/:year/:month/:day/:slug/' do
+  redirect "/post/#{params[:year]}/#{params[:month]}/#{params[:day]}/#{params[:slub]}", 301
+end
+
+get '/post/:year/:month/:day/:slug' do
+  post = Post.first(:slug => params[:slug])
+  stop [ 404, "Page Not Found" ] unless post
+  @title = post.title
+  erb :post, :locals => { :post => post }
+end
+
+### Admin
+
+get '/posts/new' do
+  post = Post.new
+  erb :edit_post, :locals => { :post => post }
+end
+
+post '/posts' do
+end
+
+get '/post/:year/:month/:day/:slug/edit' do
+end
+
+put '/post/:year/:month/:day/:slug' do
 end

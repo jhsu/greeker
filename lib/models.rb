@@ -1,5 +1,6 @@
 class Post
   include DataMapper::Resource
+  include Paperclip::Resource
 
   property :id, Integer, :serial => true
   property :slug, String, :size => 255, :nullable => false, :index => :unique
@@ -13,8 +14,9 @@ class Post
   property :flyer_file_name, String
   property :flyer_content_type, String
   property :flyer_file_size, Integer
+  property :flyer_updated_at, DateTime
 
-  has_attached_file :flyer, :styles => { :thumb => "50x50"}
+  has_attached_file :flyer
 
   alias_method :event, :event?
 
@@ -33,10 +35,15 @@ class Post
 
   def permalink
   end
+
+  def self.latest(options={})
+    all({ :order => [:created_at.desc], :limit => 20 }.merge(options))
+  end
 end
 
 class GreekClass
   include DataMapper::Resource
+  include Paperclip::Resource
 
   property :name, String, :size => 255, :nullable => false
   property :short, String, :size => 10, :nullable => false, :index => :unique
@@ -50,6 +57,7 @@ end
 
 class Brother
   include DataMapper::Resource
+  include Paperclip::Resource
 
   property :id, Integer, :serial => true
   property :pledge_class_id, Integer, :index => true, :nullable => false
@@ -64,7 +72,7 @@ class Brother
   property :mugshot_content_type, String
   property :mugshot_file_size, Integer
 
+  has_attached_file :mugshot
+
   belongs_to :greek_class
-
-
 end
