@@ -1,3 +1,10 @@
 <% posts.each do |post| %>
-  <h2><a href="<%= post.url %>" title="read <%= post.title %>"><%= post.title %></a></h2>
+<div class="entry">
+  <h2><a href="<%= post.url %>" title="read <%= post.title %>" class="<%= post.event ? 'event' : 'news' %>"><%= post.title %></a></h2>
+  <div class="entry_body">
+    <%= post.summary %>
+  <br />
+  <a href="<%= post.url %>" title="read the post"/>(read the rest)</a>
+  </div>
+</div>
 <% end %>

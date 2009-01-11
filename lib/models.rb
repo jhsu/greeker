@@ -1,3 +1,11 @@
+class Entry
+  include DataMapper::Resource
+
+  property :id, Integer, :serial => true
+  property :slug, String, :size => 255, :nullable => false, :index => :unique
+  property :title, String, :size => 255, :nullable => false
+end
+
 class Post
   include DataMapper::Resource
   include Paperclip::Resource
@@ -6,7 +14,7 @@ class Post
   property :slug, String, :size => 255, :nullable => false, :index => :unique
   property :title, String, :size => 255, :nullable => false
   property :summary, Text, :lazy => false
-  property :event, Boolean, :default => false
+  property :event, Boolean, :default => false, :index => true
   property :created_at, DateTime, :nullable => false, :index => true
   property :updated_at, DateTime, :nullable => false
   property :body, Text
@@ -20,7 +28,11 @@ class Post
 
   alias_method :event, :event?
 
-  before(:save) { self.updated_at = Time.now }
+  before(:save) do
+    self.updated_at = Time.now
+    self.make_summary!
+    self.make_slug!
+  end
 
   def initialize(attributes={})
     self.created_at = Time.now
@@ -36,8 +48,29 @@ class Post
   def permalink
   end
 
+  def make_slug!
+    slug = self.title.downcase.gsub(/ /, '_').gsub(/[^a-z0-9_]/, '').squeeze('_')
+    self.slug = self.class.first(:slug => slug) ? slug + "_#{Time.now.strftime("%Y-%d")}" : slug
+  end
+
+  def make_summary!
+    unless self.summary
+      word_count = body.split(/\s/).size
+      self.summary = word_count <= 50 ? self.body : self.body[0..50]
+    end
+  end
+
+  ### fetching
+
   def self.latest(options={})
     all({ :order => [:created_at.desc], :limit => 20 }.merge(options))
+  end
+
+  def self.news(options={})
+    all({ :order => [:created_at.desc], :limit => 20, :event => false }.merge(options))
+  end
+  def self.events(options={})
+    all({ :order => [:created_at.desc], :limit => 20, :event => true }.merge(options))
   end
 end
 
