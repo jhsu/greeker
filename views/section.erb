@@ -1,0 +1,8 @@
+<% posts.each do |post| %>
+<div class="entry">
+  <h2><a href="<%= post.url %>" title="<%= post.title %>"><%= post.title %></a></h2>
+  <div class="entry_body">
+    <%= post.summary %>
+  </div>
+</div>
+<% end %>

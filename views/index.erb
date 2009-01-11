@@ -1,3 +1,4 @@
+total pages: <%= page_count %>
 <% posts.each do |post| %>
 <div class="entry">
   <h2><a href="<%= post.url %>" title="read <%= post.title %>" class="<%= post.event ? 'event' : 'news' %>"><%= post.title %></a></h2>
@@ -7,4 +8,11 @@
   <a href="<%= post.url %>" title="read the post"/>(read the rest)</a>
   </div>
 </div>
+<% end %>
+
+<% unless page >= page_count %>
+<a href="/?page=<%= page + 1 %>" title="older posts">older posts</a>
+<% end %>
+<% unless page == 1 %>
+<a href="/?page=<%= page - 1 %>" title="more recent posts">newer posts</a>
 <% end %>

@@ -1,0 +1,16 @@
+a { color: #9E3434; }
+
+#navi { list-style: none; margin: 0;}
+  #navi li { padding: 0; float: left;}
+  #navi li a { display: block; padding: 5px 8px;}
+  #navi li a:hover { background: #ccc; }
+
+form {}
+  input[type="text"] 		{ width: 470px; }
+  input[type="submit"] 	    {}
+  textarea                  { width: 470px; }
+  textarea#post_summary 	{ height: 80px; }
+  textarea#post_body		{}
+
+.entry { border-bottom: 1px solid #ccc; margin-bottom: .7em; padding-bottom: .7em;}
+

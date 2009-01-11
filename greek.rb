@@ -2,6 +2,8 @@ require 'rubygems'
 require 'sinatra'
 require 'dm-core'
 require 'dm-paperclip'
+require 'dm-is-paginated'
+require 'rdiscount'
 
 root_dir = File.dirname(__FILE__)
 $:.unshift "#{root_dir}/lib"
@@ -14,6 +16,7 @@ configure :development do
   require 'ostruct'
   Greek = OpenStruct.new(
     :title => 'Nu Alpah Phi',
+    :chapter => 'Delta',
     :author => 'admin',
     :url_base => 'http://localhost:4567/'
   )
@@ -30,8 +33,9 @@ layout 'layout'
 ### Public
 
 get '/' do
-  posts = Post.latest(:limit => 20)
-  erb :index, :locals => { :posts => posts }
+  page = params[:page] ? params[:page].to_i : 1
+  page_count, posts = Post.paginated(:page => page)
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page }
 end
 
 get '/post/:year/:month/:day/:slug/' do
@@ -55,7 +59,13 @@ get '/events' do
   erb :section, :locals => { :posts => posts }
 end
 
-### Admin
+### Posts archive
+
+get '/circa/:year' do
+
+end
+
+### Posts Admin
 
 get '/posts/new' do
   post = Post.new
@@ -66,13 +76,75 @@ post '/posts' do
   post = Post.new( :title => params[:title],
                    :body => params[:body],
                    :summary => params[:summary])
-  post.event = true if params[:event].to_s == 'true'
+  post.event = true if params[:event]
   post.save
-  redirect post.url
+  redirect "/#{post.url}"
 end
 
 get '/post/:year/:month/:day/:slug/edit' do
+  post = Post.first(:slug => params[:slug])
+  erb :edit_post, :locals => { :post => post, :url => "/#{post.url}"}
 end
 
 put '/post/:year/:month/:day/:slug' do
+  post = Post.first(:slug => params[:slug])
+  post.title = params[:title]
+  post.body = params[:body]
+  post.summary = params[:summary]
+  post. true if params[:event]
+  post.save
+  redirect "/#{post.url}"
+end
+
+delete '/post/:year/:month/:day/:slug' do
+  post = Post.first(:slug => params[:slug])
+  post.destroy
+  redirect "/"
+end
+
+### Pages
+
+get '/about' do
+  page = Page.first(:slug => 'about')
+end
+
+get '/contact' do
+  page = Page.first(:slug => 'contact')
+end
+
+get '/media' do
+  page = Page.first(:slug => 'media')
+end
+
+### Roster
+
+get '/roster' do
+end
+
+get '/roster/:klass/brothers' do
+end
+
+### Roster Admin
+
+get '/roster/:klass/brothers/new' do
+end
+
+post '/roster/:klass/brothers' do
+end
+
+get '/roster/:klass/brother/:pledge_name/edit' do
+  # brother = Brother.first(:pledge_name => params[:pledge_name)
+  # erb :edit_brother, :locals => { :brother => brother, :url => brother.url }
+end
+
+put '/roster/:klass/brother/:pledge_name' do
+  # brother = Brother.first(:pledge_name => params[:pledge_name)
+  # brother.update_attributes(:name => params[:name], :pledge_name => params[:pledge_name])
+  redirect "/roster/#{params[:klass]}/brothers"
+end
+
+delete '/roster/:klass/brother/:pledge_name' do
+  # brother = Brother.first(:pledge_name => params[:pledge_name])
+  # brother.destroy
+  redirect "/roster/#{params[:klass]}/brothers"
 end
