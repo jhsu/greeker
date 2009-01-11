@@ -1,4 +1,3 @@
-total pages: <%= page_count %>
 <% posts.each do |post| %>
 <div class="entry">
   <h2><a href="<%= post.url %>" title="read <%= post.title %>" class="<%= post.event ? 'event' : 'news' %>"><%= post.title %></a></h2>

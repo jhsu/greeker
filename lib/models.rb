@@ -87,12 +87,10 @@ class Post
     per_page = options.delete(:per_page) || 10
     page = options.delete(:page) || 1
 
-    options.reverse_merge({ :order => [:created_at.desc] })
-
     all_posts = all(options)
     page_count = (all_posts.count.to_f / per_page).ceil
 
-    options.merge!({ :limit => per_page, :offset => (page - 1) * per_page })
+    options.merge!({ :limit => per_page, :offset => (page - 1) * per_page, :order => [:created_at.desc]})
     
     posts = all(options)
     [ page_count, posts ]
