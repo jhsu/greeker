@@ -2,7 +2,7 @@ require 'dm-core'
 require 'dm-paperclip'
 require 'rdiscount'
 
-class Entry
+class Page
   include DataMapper::Resource
 
   property :id, Integer, :serial => true
@@ -10,14 +10,19 @@ class Entry
   property :created_at, DateTime, :nullable => false, :index => true
   property :updated_at, DateTime, :nullable => false
 
+  property :title, String, :size => 255, :nullable => false
+  property :body, Text, :lazy => false
+
   before(:save) do
     self.updated_at = Time.now
   end
-end
 
-class Page < Entry
-  property :title, String, :size => 255, :nullable => false
-  property :body, Text, :lazy => false
+  def initialize(attributes={})
+    self.created_at = Time.now
+    self.updated_at = self.created_at
+    self.slug = attributes[:title].downcase
+    super
+  end
 
   def body_html
     RDiscount.new(self.body, :smart).to_html.strip

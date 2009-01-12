@@ -116,14 +116,17 @@ end
 
 get '/about' do
   page = Page.first(:slug => 'about')
+  erb :page, :locals => { :page => page }
 end
 
 get '/contact' do
   page = Page.first(:slug => 'contact')
+  erb :page, :locals => { :page => page }
 end
 
 get '/media' do
   page = Page.first(:slug => 'media')
+  erb :page, :locals => { :page => page }
 end
 
 ### Roster
