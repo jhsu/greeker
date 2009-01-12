@@ -1,0 +1,9 @@
+general:
+  name: 'Pi Epsilon Epsilon'
+  short: 'PEE'
+
+chapter:
+  name: 'Alpha' # in caps, inserts in to page title as "&#{name};"
+  location: 'Buffalo, NY'
+  established: '1986'
+  affiliation: 'SUNY University at Buffalo'

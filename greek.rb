@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'dm-core'
 require 'dm-paperclip'
-require 'dm-is-paginated'
+require 'yaml'
 require 'rdiscount'
 
 root_dir = File.dirname(__FILE__)
@@ -13,10 +13,15 @@ configure :development do
   DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/development.db")
   DataMapper.auto_migrate!
   
+  CONFIG = YAML.load_file("#{root_dir}/config/chapter.yml")
+  GENERAL = CONFIG['general']
+  CHAPTER = CONFIG['chapter']
+
   require 'ostruct'
   Greek = OpenStruct.new(
-    :title => 'Nu Alpah Phi',
-    :chapter => 'Delta',
+    :title => GENERAL['name'],
+    :short => GENERAL['short'],
+    :chapter => CHAPTER['name'],
     :author => 'admin',
     :url_base => 'http://localhost:4567/'
   )
