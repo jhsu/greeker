@@ -118,7 +118,7 @@ class GreekClass
 
   property :id, Integer, :serial => true
   property :name, String, :size => 255, :nullable => false
-  property :slug, String, :size => 255, :nullable => false, :index => :unique # short code for greek letter
+  property :slug, String, :size => 20, :nullable => false, :index => :unique # short code for greek letter
 
   property :banner_file_name, String
   property :banner_content_type, String
