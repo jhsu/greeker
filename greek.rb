@@ -129,6 +129,17 @@ get '/media' do
   erb :page, :locals => { :page => page }
 end
 
+### Page Admin
+
+get '/:page/edit' do
+  page = Page.first(:slug => params[:page])
+  stop [ 404, "Page Not Found" ] unless page
+  erb :edit_page, :locals => { :page => page, :url => page.url }
+end
+
+put '/:page' do
+end
+
 ### Roster
 
 get '/roster' do
@@ -144,25 +155,32 @@ end
 
 ### Roster Admin
 
+get '/add_brother' do
+  greek_classes = GreekClass.all
+  erb :pick_class, :locals => { :greek_classes => greek_classes }
+end
+
 get '/roster/:klass/brothers/new' do
+  brother = Brother.new
+  erb :edit_brother, :locals => { :brother => brother, :url => "/roster/#{params[:klass]}/new" }
 end
 
 post '/roster/:klass/brothers' do
 end
 
 get '/roster/:klass/brother/:pledge_name/edit' do
-  # brother = Brother.first(:pledge_name => params[:pledge_name)
-  # erb :edit_brother, :locals => { :brother => brother, :url => brother.url }
+  brother = Brother.first(:slug => params[:pledge_name])
+  erb :edit_brother, :locals => { :brother => brother, :url => brother.url }
 end
 
 put '/roster/:klass/brother/:pledge_name' do
-  # brother = Brother.first(:pledge_name => params[:pledge_name)
-  # brother.update_attributes(:name => params[:name], :pledge_name => params[:pledge_name])
+  brother = Brother.first(:slug => params[:pledge_name])
+  brother.update_attributes(:name => params[:name], :pledge_name => params[:pledge_name])
   redirect "/roster/#{params[:klass]}/brothers"
 end
 
 delete '/roster/:klass/brother/:pledge_name' do
-  # brother = Brother.first(:pledge_name => params[:pledge_name])
-  # brother.destroy
+  brother = Brother.first(:slug => params[:pledge_name])
+  brother.destroy
   redirect "/roster/#{params[:klass]}/brothers"
 end

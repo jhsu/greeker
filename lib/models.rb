@@ -31,6 +31,10 @@ class Page
   def body_html
     RDiscount.new(self.body, :smart).to_html.strip
   end
+
+  def url
+    "#{self.slug}"
+  end
 end
 
 class Post

@@ -1,0 +1,24 @@
+<div class="span-12">
+  <form action="/<%= url %>" method="post">
+    <input type="hidden" name="_method" value="put" />
+    <fieldset>
+      <legend>Edit Page</legend>
+      <h2><%= page.title %> <small>page</small></h2>
+      <label for="page_body">Text</label><br />
+      <textarea name="body" id="page_body"><%= page.body %></textarea>
+
+      <input type="submit" value="save" />
+    </fieldset>
+  </form>
+</div>
+
+<div class="span-12 last">
+  <h2>Post Preview</h2>
+  <div class="wmd-preview notice">
+  </div>
+</div>
+
+<script type="text/javascript"> 
+  wmd_options = { output: "Markdown" }
+</script>
+<script type="text/javascript" src="/javascript/wmd/wmd.js"></script>

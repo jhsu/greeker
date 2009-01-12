@@ -1,3 +1,4 @@
 *.db
 *.swp
 config/chapter.yml
+config/brothers.yml

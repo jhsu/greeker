@@ -40,5 +40,14 @@ namespace :db do
     end
   end
 
-  task :bootstrap => [:init, :welcome, :event, :pages, :greekify]
+  desc "add brothers from config/brothers.yaml"
+  task :brothers do
+    require 'yaml'
+    BROS = YAML.load_file("#{root_dir}/config/brothers.yml")
+    brothers.each do |bro|
+      GreekClass.
+    end
+  end
+
+  task :bootstrap => [:init, :welcome, :event, :pages, :greekify, :brothers]
 end
