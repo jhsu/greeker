@@ -1,3 +1,7 @@
+require 'dm-core'
+require 'dm-paperclip'
+require 'rdiscount'
+
 class Entry
   include DataMapper::Resource
 

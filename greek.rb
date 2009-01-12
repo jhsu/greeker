@@ -1,9 +1,6 @@
 require 'rubygems'
 require 'sinatra'
-require 'dm-core'
-require 'dm-paperclip'
 require 'yaml'
-require 'rdiscount'
 
 root_dir = File.dirname(__FILE__)
 $:.unshift "#{root_dir}/lib"
