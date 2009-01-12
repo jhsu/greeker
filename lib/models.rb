@@ -100,15 +100,15 @@ class Post
     [ page_count, posts ]
   end
 
-  def self.latest(options={})
-    all({ :order => [:created_at.desc], :limit => 20 }.merge(options))
-  end
-
-  def self.news(options={})
-    all({ :order => [:created_at.desc], :limit => 20, :event => false }.merge(options))
-  end
-  def self.events(options={})
-    all({ :order => [:created_at.desc], :limit => 20, :event => true }.merge(options))
+  def self.circa(options={})
+    year = options.delete(:year) || Time.now.year
+    options.merge!({
+      :created_at.gte => Date.new(year, 1, 1),
+      :created_at.lt => Date.new(year + 1, 1, 1),
+      :order => [:created_at.asc]
+    })
+    posts = all(options)
+    [ 1, posts ]
   end
 end
 

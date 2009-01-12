@@ -1,16 +1,25 @@
 a { color: #9E3434; }
+a:hover { color: #DE0D1B; text-decoration: none;}
 
-#navi { list-style: none; margin: 0;}
+#header h1 a { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; font-weight: bold;}
+#navi { list-style: none; margin: 0; padding: 15px 20px; overflow: auto;}
   #navi li { padding: 0; float: left;}
-  #navi li a { display: block; padding: 5px 8px;}
-  #navi li a:hover { background: #ccc; }
+  #navi li.admin { float: right; }
+  #navi li a { display: block; padding: 5px 8px; text-decoration: none;
+	  			font: 14px/1 "Neue Helvetica", Helvetica, Verdana, sans-serif;
+  					 color:;}
+  #navi li a:hover { color:; }
 
 form {}
-  input[type="text"] 		{ width: 470px; }
+  input[type="text"] 		{ width: 430px; }
   input[type="submit"] 	    {}
-  textarea                  { width: 470px; }
+  textarea                  { width: 430px; }
   textarea#post_summary 	{ height: 80px; }
   textarea#post_body		{}
 
-.entry { border-bottom: 1px solid #ccc; margin-bottom: .7em; padding-bottom: .7em;}
+.entry { border-bottom: 1px dotted #232323; margin-bottom: .7em; padding-bottom: .7em;}
 
+.cancel { float: right; }
+
+.post_admin > * { display: inline; }
+.post_admin input[type="submit"] { margin-left: 10px; }

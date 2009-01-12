@@ -14,12 +14,15 @@ configure :development do
   CONFIG = YAML.load_file("#{root_dir}/config/chapter.yml")
   GENERAL = CONFIG['general']
   CHAPTER = CONFIG['chapter']
+  SITE = CONFIG['site']
 
   require 'ostruct'
   Greek = OpenStruct.new(
     :title => GENERAL['name'],
     :short => GENERAL['short'],
     :chapter => CHAPTER['name'],
+    :tel => CHAPTER['tel'],
+    :begin_year => SITE['begin_year'],
     :author => 'admin',
     :url_base => 'http://localhost:4567/'
   )
@@ -67,7 +70,8 @@ end
 ### Posts archive
 
 get '/circa/:year' do
-
+  page_count, posts = Post.circa(:year => params[:year].to_i)
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => 1}
 end
 
 ### Posts Admin

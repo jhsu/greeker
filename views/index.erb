@@ -1,17 +1,48 @@
-<% posts.each do |post| %>
-<div class="entry">
-  <h2><a href="<%= post.url %>" title="read <%= post.title %>" class="<%= post.event ? 'event' : 'news' %>"><%= post.title %></a></h2>
-  <div class="entry_body">
-    <%= post.summary %>
-  <br />
-  <a href="<%= post.url %>" title="read the post"/>(read the rest)</a>
-  </div>
+<div class="intro span-23 box">
+  <h2>Welcome</h2>
+  <p>Hello, everybody! Enjoy your stay.</p>
 </div>
-<% end %>
 
-<% unless page >= page_count %>
-<a href="/?page=<%= page + 1 %>" title="older posts">older posts</a>
-<% end %>
-<% unless page == 1 %>
-<a href="/?page=<%= page - 1 %>" title="more recent posts">newer posts</a>
-<% end %>
+<div class="span-16">
+  <% posts.each do |post| %>
+  <div class="entry">
+    <h2><a href="<%= post.url %>" title="read <%= post.title %>" class="<%= post.event ? 'event' : 'news' %>"><%= post.title %></a></h2>
+    <div class="entry_body">
+      <%= post.summary %>
+    <br />
+    <a href="<%= post.url %>" title="read the post"/>(read the rest)</a>
+    </div>
+  </div>
+  <% end %>
+
+  <% unless page >= page_count %>
+  <a href="/?page=<%= page + 1 %>" title="older posts">older posts</a>
+  <% end %>
+  <% unless page == 1 %>
+  <a href="/?page=<%= page - 1 %>" title="more recent posts">newer posts</a>
+  <% end %>
+</div>
+
+<div class="span-8 last">
+  <div class="box">
+    <p>Some information that I would really like to share with you</p>
+  </div>
+
+  <h2>Contact</h2>
+  <div class="vcard">
+    <a class="fn org url" href="/" title="<%= Greek.title %>"><%= Greek.title %></a> <span class="nickname"><%= Greek.short %></span>
+    <div>Events: 
+      <span class="tel"><%= Greek.tel %></span>
+    </div>
+    <div>E-mail:
+      <span class="email">info@buffalonaphi.com</span>
+    </div>
+  </div>
+
+  <h2>Archive</h2>
+  <ul>
+  <% (Greek.begin_year..Time.now.year).to_a.map do |y| %>
+    <li><a href="/circa/<%= y %>" title="view posts from <%= y %>"><%= y %></a></li>
+  <% end %>
+  </ul>
+</div>
