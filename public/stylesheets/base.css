@@ -1,3 +1,6 @@
+.left  { float: left; }
+.right { float: right; }
+
 a { color: #9E3434; }
 a:hover { color: #DE0D1B; text-decoration: none;}
 
@@ -19,7 +22,7 @@ form {}
   textarea#post_summary 	  { height: 80px; }
   textarea#post_body		  {}
 
-.entry { border-bottom: 1px dotted #232323; margin-bottom: .7em; padding-bottom: .7em;}
+.entry { margin-bottom: .7em; padding-bottom: .7em; }
 
 .cancel { margin-left: 15px; float: right; }
 
