@@ -89,7 +89,7 @@ class Post
 
   def self.paginated(options={})
     per_page = options.delete(:per_page) || 10
-    page = options.delete(:page) || 1
+    page = (options[:page] && options[:page] > 0 ) ? options.delete(:page) : 1
 
     all_posts = all(options)
     page_count = (all_posts.count.to_f / per_page).ceil

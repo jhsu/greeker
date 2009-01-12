@@ -53,13 +53,15 @@ get '/post/:year/:month/:day/:slug' do
 end
 
 get '/news' do
-  posts = Post.news
-  erb :section, :locals => { :posts => posts }
+  page = params[:page] ? params[:page].to_i : 1
+  page_count, posts = Post.paginated(:page => page, :event => false)
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page }
 end
 
 get '/events' do
-  posts = Post.events
-  erb :section, :locals => { :posts => posts }
+  page = params[:page] ? params[:page].to_i : 1
+  page_count, posts = Post.paginated(:page => page, :event => true)
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page }
 end
 
 ### Posts archive
