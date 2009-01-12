@@ -16,7 +16,7 @@ class Page < Entry
   property :body, Text, :lazy => false
 
   def body_html
-    RDiscount.new(self.body).to_html
+    RDiscount.new(self.body, :smart).to_html.strip
   end
 end
 
@@ -58,7 +58,7 @@ class Post
   end
 
   def body_html
-    RDiscount.new(self.body).to_html
+    RDiscount.new(self.body, :filter_html, :smart).to_html.strip
   end
 
   def url
