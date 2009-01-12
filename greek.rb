@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require 'dm-core'
 require 'yaml'
 
 root_dir = File.dirname(__FILE__)
@@ -93,7 +94,7 @@ put '/post/:year/:month/:day/:slug' do
   post.title = params[:title]
   post.body = params[:body]
   post.summary = params[:summary]
-  post. true if params[:event]
+  post.event = true if params[:event]
   post.save
   redirect "/#{post.url}"
 end
