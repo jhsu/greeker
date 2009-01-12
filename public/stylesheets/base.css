@@ -22,7 +22,7 @@ form {}
   textarea#post_summary 	  { height: 80px; }
   textarea#post_body		  {}
 
-.entry { margin-bottom: .7em; padding-bottom: .7em; }
+.entry { margin-bottom: .7em; padding-bottom: .7em; overflow: auto; }
 
 .cancel { margin-left: 15px; float: right; }
 
