@@ -1,4 +1,5 @@
 require 'dm-core'
+require 'dm-validations'
 require 'dm-paperclip'
 require 'rdiscount'
 
@@ -12,6 +13,9 @@ class Page
 
   property :title, String, :size => 255, :nullable => false
   property :body, Text, :lazy => false
+
+  validates_present :title, :body, :slug
+  validates_is_unique :slug
 
   before(:save) do
     self.updated_at = Time.now
@@ -46,6 +50,9 @@ class Post
   property :flyer_content_type, String
   property :flyer_file_size, Integer
   property :flyer_updated_at, DateTime
+
+  validates_present :title, :body, :summary, :slug
+  validates_is_unique :slug
 
   has_attached_file :flyer
 
@@ -129,6 +136,9 @@ class GreekClass
   property :banner_content_type, String
   property :banner_file_size, Integer
 
+  validates_present :name, :slug
+  validates_is_unique :slug
+
   has_attached_file :banner
 
   has n, :pledges, :class_name => 'Brother'
@@ -151,6 +161,9 @@ class Brother
   property :mugshot_file_name, String
   property :mugshot_content_type, String
   property :mugshot_file_size, Integer
+
+  validates_present :greek_class_id, :name, :pledge_name, :slug
+  validates_is_unique :pledge_name, :slug
 
   has_attached_file :mugshot
 

@@ -12,12 +12,16 @@ namespace :db do
 
   desc "create welcome Post"
   task :welcome => [:environment] do
-    Post.create(:title => 'Welcome!', :summary => 'Read on my friend, feel welcome.', :body => 'Welcome to the very first post')
+    post = Post.new(:title => 'Welcome!', :summary => 'Read on my friend, feel welcome.', :body => 'Welcome to the very first post')
+    post.make_slug!
+    post.save
   end
 
   desc "create dummy Event"
   task :event => [:environment] do
-    Post.create(:title => 'Party Paradise', :summary => 'Check out the biggest event coming!', :body => 'Event details to have the **Time of your life**', :event => true)
+    post = Post.new(:title => 'Party Paradise', :summary => 'Check out the biggest event coming!', :body => 'Event details to have the **Time of your life**', :event => true)
+    post.make_slug!
+    post.save
   end
 
   desc "create required Pages"
