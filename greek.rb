@@ -129,9 +129,14 @@ end
 ### Roster
 
 get '/roster' do
+  greek_classes = GreekClass.all
+  erb :roster, :locals => { :greek_classes => greek_classes }
 end
 
-get '/roster/:klass/brothers' do
+get '/roster/:klass' do
+  greek_class = GreekClass.first(:slug => params[:klass])
+  brothers = greek_class.pledges
+  erb :brothers, :locals => { :brothers => brothers, :greek_class => greek_class }
 end
 
 ### Roster Admin

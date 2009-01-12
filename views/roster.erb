@@ -1,0 +1,4 @@
+<h2>Roster</h2>
+<% greek_classes.each do |gk| %>
+  <a href="/roster/<%= gk.slug %>" title="<%= gk.name %>" class="greek_slug"><%= gk.slug %></a>
+<% end %>

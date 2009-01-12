@@ -12,7 +12,19 @@ namespace :db do
 
   desc "create welcome Post"
   task :welcome => [:environment] do
-    post = Post.create(:title => 'Welcome!', :summary => 'Read on my friend, feel welcome.', :body => 'Welcome to the very first post')
+    Post.create(:title => 'Welcome!', :summary => 'Read on my friend, feel welcome.', :body => 'Welcome to the very first post')
+  end
+
+  desc "create dummy Event"
+  task :event => [:environment] do
+    Post.create(:title => 'Party Paradise', :summary => 'Check out the biggest event coming!', :body => 'Event details to have the **Time of your life**', :event => true)
+  end
+
+  desc "create required Pages"
+  task :pages => [:environment] do
+    ["About","Media","Contact"].each do |page|
+      Page.create(:title => page, :slug => page.downcase, :body => 'Page content goes here.')
+    end
   end
 
   desc "add greek alpabets"
@@ -24,5 +36,5 @@ namespace :db do
     end
   end
 
-  task :bootstrap => [:init, :welcome, :greekify]
+  task :bootstrap => [:init, :welcome, :event, :pages, :greekify]
 end
