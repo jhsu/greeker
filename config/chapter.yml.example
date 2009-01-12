@@ -7,3 +7,8 @@ chapter:
   location: 'Buffalo, NY'
   established: '1986'
   affiliation: 'SUNY University at Buffalo'
+  tel: '716-555-2450'
+  email: 'info@domainname.com'
+
+site:
+  begin_year: 2009 # provide a year

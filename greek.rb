@@ -22,6 +22,7 @@ configure :development do
     :short => GENERAL['short'],
     :chapter => CHAPTER['name'],
     :tel => CHAPTER['tel'],
+    :email => CHAPTER['email'],
     :begin_year => SITE['begin_year'],
     :author => 'admin',
     :url_base => 'http://localhost:4567/'
