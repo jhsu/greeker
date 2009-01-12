@@ -4,10 +4,12 @@
   <fieldset>
     <legend><%= post.new_record? ? 'New' : 'Edit' %> Post</legend>
 
-    <label for="post_title">Title</label><br />
-    <input type="text" name="title" id="post_title" value="<%= post.title %>" /><br />
 
-    <input type="checkbox" name="event" id="post_event" value="true" <%= 'checked' if post.event %> /> <label for="post_event">Event?</label><br />
+    <label for="post_title">Title</label><br />
+    <input type="text" name="title" id="post_title" value="<%= post.title %>" />
+
+    <label for="post_event">Event?</label>
+    <input type="checkbox" name="event" id="post_event" value="true" <%= 'checked' if post.event %> /><br />
 
     <label for="post_summary">Summary</label><br />
     <textarea name="summary" id="post_summary" class="wmd-ignore"><%= post.summary %></textarea><br />
@@ -15,7 +17,7 @@
     <label for="post_body">Text</label><br />
     <textarea name="body" id="post_body"><%= post.body %></textarea><br />
 
-    <a href="/" title="Cancel" class="cancel">cancel</a>
+    <a href="/" title="Cancel" class="cancel" onclick="return confirm('Are you sure you want to Cancel this post?');">cancel</a>
     <input type="submit" value="post" />
   </fieldset>
   </form>

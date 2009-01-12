@@ -11,15 +11,17 @@ a:hover { color: #DE0D1B; text-decoration: none;}
   #navi li a:hover { color:; }
 
 form {}
-  input[type="text"] 		{ width: 430px; }
-  input[type="submit"] 	    {}
-  textarea                  { width: 430px; }
-  textarea#post_summary 	{ height: 80px; }
-  textarea#post_body		{}
+  label:hover				  { cursor: pointer; }
+  input[type="text"] 		  { width: 350px; }
+  input[type="submit"][value="post"] { float: right; }
+  input[type="submit"]:hover  { cursor: pointer; }
+  textarea                    { width: 430px; }
+  textarea#post_summary 	  { height: 80px; }
+  textarea#post_body		  {}
 
 .entry { border-bottom: 1px dotted #232323; margin-bottom: .7em; padding-bottom: .7em;}
 
-.cancel { float: right; }
+.cancel { margin-left: 15px; float: right; }
 
 .post_admin > * { display: inline; }
 .post_admin input[type="submit"] { margin-left: 10px; }
