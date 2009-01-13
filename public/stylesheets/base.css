@@ -28,3 +28,7 @@ form {}
 
 .post_admin > * { display: inline; }
 .post_admin input[type="submit"] { margin-left: 10px; }
+
+.pick_class_a { padding: 8px 12px; margin: 0 2px; text-decoration: none;
+                background: ; color: ; }
+.pick_class_a:hover { background: #000; color: #fff; }
