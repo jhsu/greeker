@@ -2,3 +2,5 @@
 *.swp
 config/chapter.yml
 config/brothers.yml
+public/flyers
+public/system

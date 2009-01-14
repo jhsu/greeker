@@ -33,6 +33,9 @@ $LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
 require 'models'
 
 helpers do
+  def authorized?
+    false
+  end
 end
 
 layout 'layout'
@@ -40,9 +43,10 @@ layout 'layout'
 ### Public
 
 get '/' do
+  welcome = Page.first(:slug => "welcome")
   page = params[:page] ? params[:page].to_i : 1
   page_count, posts = Post.paginated(:page => page)
-  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page }
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page, :welcome => welcome, :show_welcome => true }
 end
 
 get '/post/:year/:month/:day/:slug/' do
@@ -59,20 +63,20 @@ end
 get '/news' do
   page = params[:page] ? params[:page].to_i : 1
   page_count, posts = Post.paginated(:page => page, :event => false)
-  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page }
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page, :show_welcome => false }
 end
 
 get '/events' do
   page = params[:page] ? params[:page].to_i : 1
   page_count, posts = Post.paginated(:page => page, :event => true)
-  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page }
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => page, :show_welcome => false }
 end
 
 ### Posts archive
 
 get '/circa/:year' do
   page_count, posts = Post.circa(:year => params[:year].to_i)
-  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => 1}
+  erb :index, :locals => { :posts => posts, :page_count => page_count, :page => 1, :show_welcome => false }
 end
 
 ### Posts Admin

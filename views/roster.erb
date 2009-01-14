@@ -1,4 +1,6 @@
 <h2>Roster</h2>
+<div class="roster_list">
 <% greek_classes.each do |gk| %>
-  <a href="/roster/<%= gk.slug %>" title="<%= gk.name %>" class="greek_slug"><%= gk.slug %></a>
+  <a href="/roster/<%= gk.slug %>" title="<%= gk.name %>" class="pick_class_a"><%= gk.slug %></a>
 <% end %>
+</div>

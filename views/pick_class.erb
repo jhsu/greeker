@@ -1,6 +1,8 @@
 <div class="notice">
   Pick a class to add a brother too.
 </div>
+<div class="roster_list">
 <% greek_classes.each do |klass| %>
   <a href ="/roster/<%= klass.slug %>/brothers/new" title="add brother to <%= klass.name %>" class="pick_class_a"><%= klass.slug %></a>
 <% end %>
+</div>

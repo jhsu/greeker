@@ -1,16 +1,21 @@
+<% if show_welcome %>
 <div class="intro span-23 box">
-  <h2>Welcome</h2>
-  <p>Hello, everybody! Enjoy your stay.</p>
+  <h2><%= welcome.title %></h2>
+  <% if authorized? %>
+    <div class="meta">
+      <a href="/<%= welcome.slug %>/edit" title="edit welcome section">edit</a>
+    </div>
+  <% end %>
+  <%= welcome.body_html %>
 </div>
+<% end %>
 
 <div class="span-16">
   <% posts.each do |post| %>
   <div class="entry">
-    <h2><a href="<%= post.url %>" title="read <%= post.title %>" class="<%= post.event ? 'event' : 'news' %>"><%= post.title %></a></h2>
+    <h2><a href="/<%= post.url %>" title="read <%= post.title %>" class="<%= post.event ? 'event' : 'news' %>"><%= post.title %></a></h2>
     <div class="entry_body">
       <%= post.summary %>
-    <br />
-    <a href="<%= post.url %>" title="read the post" class="right"/>read the rest</a>
     </div>
   </div>
   <% end %>
@@ -26,17 +31,6 @@
 <div class="span-8 last">
   <div class="box">
     <p>Some information that I would really like to share with you</p>
-  </div>
-
-  <h2>Contact</h2>
-  <div class="vcard">
-    <a class="fn org url" href="/" title="<%= Greek.title %>"><%= Greek.title %></a> <span class="nickname"><%= Greek.short %></span>
-    <div>Events: 
-      <span class="tel"><%= Greek.tel %></span>
-    </div>
-    <div>E-mail:
-      <span class="email"><%= Greek.email %></span>
-    </div>
   </div>
 
   <h2>Archive</h2>

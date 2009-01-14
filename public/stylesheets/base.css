@@ -1,5 +1,6 @@
 .left  { float: left; }
 .right { float: right; }
+div.box { background: #fcfcfc; }
 
 a { color: #9E3434; }
 a:hover { color: #DE0D1B; text-decoration: none;}
@@ -8,7 +9,7 @@ a:hover { color: #DE0D1B; text-decoration: none;}
 #navi { list-style: none; margin: 0; padding: 15px 20px; overflow: auto;}
   #navi li { padding: 0; float: left;}
   #navi li.admin { float: right; }
-  #navi li a { display: block; padding: 5px 8px; text-decoration: none;
+  #navi li a { display: block; padding: 5px 7px; text-decoration: none;
 	  			font: 14px/1 "Neue Helvetica", Helvetica, Verdana, sans-serif;
   					 color:;}
   #navi li a:hover { color:; }
@@ -29,6 +30,7 @@ form {}
 .post_admin > * { display: inline; }
 .post_admin input[type="submit"] { margin-left: 10px; }
 
-.pick_class_a { padding: 8px 12px; margin: 0 2px; text-decoration: none;
-                background: ; color: ; }
+.roster_list  { background: #cdcdcd; overflow: auto; }
+.pick_class_a { display: block; float: left; padding: 8px 12px; margin: 0 2px; text-decoration: none;
+                background: ; color: #000; font-family: "Arial Black", sans-serif; font-size:16px; }
 .pick_class_a:hover { background: #000; color: #fff; }

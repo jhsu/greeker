@@ -10,9 +10,9 @@ namespace :db do
     DataMapper.auto_migrate!
   end
 
-  desc "create welcome Post"
-  task :welcome => [:environment] do
-    post = Post.new(:title => 'Welcome!', :summary => 'Read on my friend, feel welcome.', :body => 'Welcome to the very first post')
+  desc "create first Post"
+  task :first_post => [:environment] do
+    post = Post.new(:title => 'First post!', :summary => 'Read on my friend, feel welcome.', :body => 'Welcome to the very first post')
     post.make_slug!
     post.save
   end
@@ -26,7 +26,7 @@ namespace :db do
 
   desc "create required Pages"
   task :pages => [:environment] do
-    ["About","Media","Contact"].each do |page|
+    ["Welcome", "About", "Media", "Contact"].each do |page|
       Page.create(:title => page, :slug => page.downcase, :body => 'Page content goes here.')
     end
   end
@@ -42,12 +42,12 @@ namespace :db do
 
   desc "add brothers from config/brothers.yaml"
   task :brothers do
-    require 'yaml'
-    BROS = YAML.load_file("#{root_dir}/config/brothers.yml")
-    brothers.each do |bro|
-      GreekClass.
-    end
+#   require 'yaml'
+#   BROS = YAML.load_file("#{root_dir}/config/brothers.yml")
+#   brothers.each do |bro|
+#     GreekClass.
+#   end
   end
 
-  task :bootstrap => [:init, :welcome, :event, :pages, :greekify, :brothers]
+  task :bootstrap => [:init, :first_post, :event, :pages, :greekify, :brothers]
 end

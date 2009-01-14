@@ -10,10 +10,10 @@
   <body>
   <div id="container" class="container">
     <div id="header" class="span-24 last">
-      <div class="span-9">
+      <div class="span-10">
         <h1><a href="/" title="go home"><%= Greek.title %> <small>&<%= Greek.chapter %>; chapter</small></a></h1>
       </div>
-      <ul id="navi" class="span-14 last">
+      <ul id="navi" class="span-13 last">
         <li><a href="/news" title="News">News</a></li>
         <li><a href="/events" title="Events">Events</a></li>
         <li><a href="/about" title="About Us">About</a></li>
@@ -21,8 +21,10 @@
         <li><a href="/media" title="Media">Media</a></li>
         <li><a href="/contact" title="Contact Us">Contact</a></li>
 
+        <% if authorized? %>
         <li class="admin"><a href="/posts/new" title="New Post">New Post</a></li>
         <li class="admin"><a href="/add_brother" title="Add a Brother">Add Brother</a></li>
+        <% end %>
       </ul>
     </div>
     <div id="content" class="span-24 last">

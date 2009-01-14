@@ -1,5 +1,7 @@
 <h2><%= page.title %></h2>
+<% if authorized? %>
 <div class="meta">
   <a href="/<%= page.slug %>/edit" title="edit post">edit</a>
 </div>
+<% end %>
 <%= page.body_html %>
