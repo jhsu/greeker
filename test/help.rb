@@ -8,4 +8,5 @@ require 'dm-core'
 require 'models'
 
 # connect to test db
-# DataMapper.configure(:default, { :adapter => 'sqlite', :dbfile => ':memory:' })
+DataMapper.setup(:default, "sqlite3::memory:")
+DataMapper.auto_migrate!
