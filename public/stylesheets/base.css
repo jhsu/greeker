@@ -1,12 +1,15 @@
 .left  { float: left; }
 .right { float: right; }
-div.box { background: #fcfcfc; }
+div.box { background: #fcfcfc; border: 1px solid #E2DBDB; }
 
 a { color: #9E3434; }
 a:hover { color: #DE0D1B; text-decoration: none;}
 
-#header h1 a { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; font-weight: bold;}
-#navi { list-style: none; margin: 0; padding: 15px 20px; overflow: auto;}
+#header h1 { background: #2A2731; }
+#header h1 a { font: 24px/1 "Palatino Linotype", "Book Antiqua", Palatino, serif; font-weight: bold;
+				display: block; padding: 15px; color: #c0c0c0; text-decoration: none; }
+#header h1 a:hover { color: #fff; background: #553B39; }
+#navi { list-style: none; margin: 0; padding: 15px 20px; overflow: auto; }
   #navi li { padding: 0; float: left;}
   #navi li.admin { float: right; }
   #navi li a { display: block; padding: 5px 7px; text-decoration: none;
@@ -32,5 +35,5 @@ form {}
 
 .roster_list  { background: #cdcdcd; overflow: auto; }
 .pick_class_a { display: block; float: left; padding: 8px 12px; margin: 0 2px; text-decoration: none;
-                background: ; color: #000; font-family: "Arial Black", sans-serif; font-size:16px; }
+                background: ; color: #000; font-family: "Arial Black", sans-serif; font-size:16px; outline: none; }
 .pick_class_a:hover { background: #000; color: #fff; }
