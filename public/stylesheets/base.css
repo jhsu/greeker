@@ -17,6 +17,8 @@ a:hover { color: #DE0D1B; text-decoration: none;}
   					 color:;}
   #navi li a:hover { color:; }
 
+#footer { border-top: 1px solid #ccc; margin-top: 18px; text-align: right; }
+
 form {}
   label:hover				  { cursor: pointer; }
   input[type="text"] 		  { width: 350px; }
