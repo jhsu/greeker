@@ -3,8 +3,26 @@
   <fieldset>
     <legend>Add/Edit Brother</legend>
 
-    <label for="">Interests</label><br />
-    <textarea></textarea><br />
+    <label for="brother_name">Name</label><br />
+    <input type="text" name="name" id="brother_name" value="<%= brother.name %>" /><br />
+
+    <label for="brother_pledge_name">Pledge Name</label><br />
+    <input type="text" name="pledge_name" id="brother_pledge_name" value="<%= brother.pledge_name %>" /><br />
+
+    <label for="brother_mugshot">Mugshot</label><br />
+    <input type="file" name="mugshot" id="brother_mugshot"/><br />
+
+    <label for="brother_hometown">Hometown</label><br />
+    <input type="text" name="hometown" id="brother_hometown" value="<%= brother.hometown %>" /><br />
+
+    <label for="brother_major">Major</label><br />
+    <input type="text" name="major" id="brother_major" value="<%= brother.major %>" /><br />
+
+    <label for="brother_quote">Quote</label><br />
+    <textarea name="quote" id="brother_quote"><%= brother.quote %></textarea><br />
+
+    <label for="brother_interests">Interests</label><br />
+    <textarea name="interests" id="brother_interests"><%= brother.interests %></textarea><br />
 
     <input type="submit" value="add" />
   </fieldset>
@@ -13,5 +31,11 @@
 
 <div class="span-12 last">
   <h2>Some notes</h2>
-  <div class="notice">Make sure you upload a photo</div>
+  <div class="notice">
+    Required Fields:<br />
+    <ul>
+      <li>Name</li>
+      <li>Pledge Name</li>
+    </ul>
+  </div>
 </div>

@@ -34,7 +34,7 @@ require 'models'
 
 helpers do
   def authorized?
-    false
+    true
   end
 end
 
@@ -172,8 +172,8 @@ end
 post '/roster/:klass/brothers' do
 end
 
-get '/roster/:klass/brother/:pledge_name/edit' do
-  brother = Brother.first(:slug => params[:pledge_name])
+get '/roster/:klass/brother/:pledge_name_slug/edit' do
+  brother = Brother.first(:slug => params[:pledge_name_slug])
   erb :edit_brother, :locals => { :brother => brother, :url => brother.url }
 end
 
