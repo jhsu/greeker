@@ -51,3 +51,10 @@ namespace :db do
 
   task :bootstrap => [:init, :first_post, :event, :pages, :greekify, :brothers]
 end
+
+namespace :test do
+  desc "run unit tests"
+  task :unit do
+    `ruby test/post_test.rb`
+  end
+end
