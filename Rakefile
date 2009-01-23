@@ -53,8 +53,8 @@ namespace :db do
 end
 
 namespace :test do
-  desc "run unit tests"
-  task :unit do
-    `ruby test/post_test.rb`
+  desc "test post"
+  task :post do
+    sh "ruby test/post_test.rb"
   end
 end
